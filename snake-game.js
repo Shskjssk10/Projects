@@ -1,14 +1,22 @@
 //Snake Food 
 const playBoard = document.querySelector(".play-board");
 
+let gameOver = false;
 let foodXCoords, foodYCoords;
 let snakeXCoords = 16, snakeYCoords = 16;
 let snakeVelocityX = 0, snakeVelocityY = 0;
 let snakeBody = [];
+let setIntervalId;
 
 const changeFoodPosition = () => {
     foodXCoords = Math.floor(Math.random() * 31) + 1;
     foodYCoords = Math.floor(Math.random() * 31) + 1;
+}
+
+const handleGameOver = () => {
+    clearInterval(setIntervalId);
+    alert("Game over! Press OK to replay!");
+    location.reload();
 }
 
 const changeDirection = (e) => {
@@ -29,6 +37,8 @@ const changeDirection = (e) => {
 }
 
 const initGame = () => {
+    if (gameOver) return handleGameOver();
+
     let foodHtmlMarkup = `<div class="food" style="grid-area: ${foodYCoords} / ${foodXCoords}"></div>`;
     foodHtmlMarkup += `<div class="snake" style="grid-area: ${snakeYCoords} / ${snakeXCoords}"></div>`;
 
@@ -37,11 +47,6 @@ const initGame = () => {
         changeFoodPosition();
         snakeBody.push([foodXCoords, foodYCoords]); //Pushes food position to snake's body.
     }
-
-
-    //19:31
-
-
 
     for (let i = snakeBody.length -1; i > 0; i--){
         // Shifts the values of elements in snake body by one forward
@@ -54,6 +59,10 @@ const initGame = () => {
     snakeXCoords += snakeVelocityX;
     snakeYCoords += snakeVelocityY;
 
+    if (snakeXCoords <= 0 || snakeXCoords > 31 || snakeYCoords <= 0 || snakeYCoords > 31){
+        gameOver = true;
+    }
+
     for (let i = 0; i < snakeBody.length; i++){
         // Adds a div for each part of the snake's body.
         foodHtmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
@@ -62,7 +71,7 @@ const initGame = () => {
     playBoard.innerHTML = foodHtmlMarkup;
 }
 changeFoodPosition();
-setInterval(initGame, 125);
+setIntervalId = setInterval(initGame, 125);
 document.addEventListener("keydown", changeDirection)
 
  
