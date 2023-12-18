@@ -1,5 +1,6 @@
 //Snake Food 
 const playBoard = document.querySelector(".play-board");
+const scoreElement = document.querySelector(".score")
 
 let gameOver = false;
 let foodXCoords, foodYCoords;
@@ -7,6 +8,7 @@ let snakeXCoords = 16, snakeYCoords = 16;
 let snakeVelocityX = 0, snakeVelocityY = 0;
 let snakeBody = [];
 let setIntervalId;
+let score = 0;
 
 const changeFoodPosition = () => {
     foodXCoords = Math.floor(Math.random() * 31) + 1;
@@ -46,6 +48,9 @@ const initGame = () => {
     if (snakeXCoords === foodXCoords && snakeYCoords === foodYCoords){
         changeFoodPosition();
         snakeBody.push([foodXCoords, foodYCoords]); //Pushes food position to snake's body.
+        score++;
+
+        scoreElement.innerHTML = `Score: ${score}`;
     }
 
     for (let i = snakeBody.length -1; i > 0; i--){
