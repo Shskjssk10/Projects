@@ -12,16 +12,16 @@ const changeFoodPosition = () => {
 }
 
 const changeDirection = (e) => {
-    if (e.key === "ArrowUp" || e.key ==="w"){
+    if ((e.key === "ArrowUp" || e.key ==="w") && snakeVelocityY !== 1){
         snakeVelocityX = 0;
         snakeVelocityY = -1;
-    } else if (e.key === "ArrowDown" || e.key === "s"){
+    } else if ((e.key === "ArrowDown" || e.key === "s") && snakeVelocityY !== -1){
         snakeVelocityX = 0;
         snakeVelocityY = 1;
-    } else if (e.key === "ArrowRight" || e.key === "d"){
+    } else if ((e.key === "ArrowRight" || e.key === "d") && snakeVelocityX !== -1){
         snakeVelocityX = 1;
         snakeVelocityY = 0;
-    } else if (e.key === "ArrowLeft" || e.key === "a"){
+    } else if ((e.key === "ArrowLeft" || e.key === "a") && snakeVelocityX !== 1){
         snakeVelocityX = -1;
         snakeVelocityY = 0;
     }
@@ -54,10 +54,10 @@ const initGame = () => {
     snakeXCoords += snakeVelocityX;
     snakeYCoords += snakeVelocityY;
 
-for (let i = 0; i < snakeBody.length; i++){
-    // Adds a div for each part of the snake's body.
-    foodHtmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
-}
+    for (let i = 0; i < snakeBody.length; i++){
+        // Adds a div for each part of the snake's body.
+        foodHtmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
+    }
 
     playBoard.innerHTML = foodHtmlMarkup;
 }
