@@ -39,8 +39,8 @@ const changeDirection = (e) => {
 const initGame = () => {
     if (gameOver) return handleGameOver();
 
-    let foodHtmlMarkup = `<div class="food" style="grid-area: ${foodYCoords} / ${foodXCoords}"></div>`;
-    foodHtmlMarkup += `<div class="snake" style="grid-area: ${snakeYCoords} / ${snakeXCoords}"></div>`;
+    let htmlMarkup = `<div class="food" style="grid-area: ${foodYCoords} / ${foodXCoords}"></div>`;
+    htmlMarkup += `<div class="snake" style="grid-area: ${snakeYCoords} / ${snakeXCoords}"></div>`;
 
     // Checks to see if the snake has hit the food
     if (snakeXCoords === foodXCoords && snakeYCoords === foodYCoords){
@@ -65,22 +65,15 @@ const initGame = () => {
 
     for (let i = 0; i < snakeBody.length; i++){
         // Adds a div for each part of the snake's body.
-        foodHtmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
+        htmlMarkup += `<div class="snake" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
+        // Checks if snake hits its own body
+        if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]){
+            gameOver = true;
+        }
     }
-
-    playBoard.innerHTML = foodHtmlMarkup;
+    playBoard.innerHTML = htmlMarkup;
 }
 changeFoodPosition();
 setIntervalId = setInterval(initGame, 125);
 document.addEventListener("keydown", changeDirection)
 
- 
-// for (let i = 0; i< 100; i++){
-//     X = Math.floor(Math.random() * 30) + 1;
-//     if (X ==0){
-//         console.log("The number is 0!!!");
-//     }
-//     else{ 
-//         console.log(X);
-//     }
-// }
