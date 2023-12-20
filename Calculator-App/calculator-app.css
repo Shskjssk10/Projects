@@ -29,6 +29,9 @@ body{
     width: calc((5/6)*100%);
     background-color: #a3de60;
     border-radius: 18px;
+    padding: 2%;
+    line-height: 15vmin;
+    font-size: 8vmin;
 }
 .bottom-portion{
     height: var(--bottom-height);
@@ -39,6 +42,32 @@ body{
 .row{
     display: flex;
     justify-content: space-around;
+    align-items: center;
     height: calc(100%/5);
-    /* border: 1px red solid; */
+}
+.row span{
+    height: 75%;
+    line-height: 7vmin;
+    text-align: center;
+    font-size: 5vmin;
+}
+.row span:not(.operator-button, .clear-button, .equal-button, .backspace-button){
+    background-color: #e0e0e0;
+}
+.row span:is(.operator-button, .equal-button){
+    background-color: grey;
+}
+.row span:is(.clear-button, .backspace-button){
+    background-color: rgb(202, 39, 39);
+}
+.row span:not(.equal-button){
+    border-radius: 8%;
+    width: calc(60%/4);
+}
+.equal-button{
+    flex-grow: 0.55;
+    border-radius: 8px;
+}
+.row span:hover{
+    opacity: 0.5;
 }
