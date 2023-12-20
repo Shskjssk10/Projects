@@ -4,3 +4,5 @@ const display = document.querySelector(".display");
 const updateDisplay = () => {
     
 }
+
+document.addEventListener("keydown");
