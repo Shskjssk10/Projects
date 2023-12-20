@@ -1,5 +1,4 @@
 # Snake-Game
-https://shskjssk10.github.io/Snake-Game/
 
 ## Description
 This project is meant for me to improve my JS skills. I only ever watched a LinkedIn course on JS fundamentals and thats about it. 
