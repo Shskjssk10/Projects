@@ -2,17 +2,21 @@ class Calculator{
     constructor(previousOperand, currentOperand){
         this.previousOperand = previousOperand;
         this.currentOperand = currentOperand;
+        this.clear();
     }
     clear(){
-
+        this.currentOperand='';
+        this.previousOperand='';
+        this.opreation = undefined;
     }
 
     delete(){
 
     }
 
-    appendNumber(){
-        
+    appendNumber(number){
+        if (number === '.' && this.currentOperand.includes('.')) return;
+        this.currentOperand += number.toString();
     }
 
     chooseOperation(operation){
@@ -28,7 +32,7 @@ class Calculator{
     }
 
     updateDisplay(){
-
+        currentOperandTextElement = this.getDisplayNumber(this.currentOperand)
     }
 
 }
@@ -42,7 +46,7 @@ const currentOperandTextElement = document.querySelector('[data-current-operand]
 console.log(currentOperandTextElement);
 let previousOperand;
 
-const cadenCalculator = new Calculator(currentOperandTextElement, previousOperand);
+const cadenCalculator = new Calculator(currentOperandTextElement);
 
 numberButtons.forEach(button => {
     document.addEventListener('click', () => {
